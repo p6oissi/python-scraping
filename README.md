@@ -1,39 +1,44 @@
 # Proovitöö Variant B – Veebipoodide hinnapäringu programm
 
 ## Ülevaade
-- Programmi eesmärgiks on **esitada** veebipoodidele lihtne andmepäring, mis
-põhineb kasutaja märksõnal, ning kuvada tulemused struktureeritul kujul (terminalis).
+- Programmi eesmärgiks on **esitada veebipoodidele lihtne andmepäring**, 
+mis põhineb kasutaja sisestatud märksõnal, 
+ning kuvada tulemused struktureeritud kujul terminalis.
 
-- Programmi kaudu saab jälgida toodete hindu ja leida automaatselt uusi 
-kuulutusi, kindla ajavahemiku järel
+- Programm võimaldab jälgida toodete hindu ja leida 
+automaatselt uusi kuulutusi kindla ajavahemiku järel.
+
+---
 
 ## Funktsionaalsus
 
-### Veebipoed kuhu päringuid esitatakse
-- **www.yaga.ee**
-- **www.arvutitark.ee**
+### Veebipoed, kuhu päringuid esitatakse
+- **[yaga.ee](https://www.yaga.ee)**  
+- **[arvutitark.ee](https://www.arvutitark.ee)**  
 
 ### Automaatsed korduspäringud
-- Programm sooritab otsinguid määratud ajaintervalliga.
+- Programm sooritab otsinguid määratud ajaintervalliga (nt iga 5 minuti järel).
 
 ### Uute toodete tuvastamine 
-- Jälgib, millised tooted on juba nähtud, ning kuvab ainult uued tulemused.
+- Programm jälgib, millised tooted on juba nähtud, ning kuvab ainult uued tulemused.
 
 ### Andmete salvestamine
 - Iga päringu tulemused salvestatakse eraldi `.json` faili koos ajatempliga.
 
+---
+
 ## Kasutamine
-0. Seadista kui tihti sa soovid päringuid esitada.
-Vaikimisi on see 300 sekundit (5 minutit)
-```
-   main.py
-   if __name__ == '__main__':
+0. Seadista päringu intervall
+- Vaikimisi on see 300 sekundit (5 minutit)
+- Intervalli saab muuta failis `main.py`:
+```python
+if __name__ == '__main__':
     keyword = input("Enter the keyword: ")
-    run_periodically(keyword, interval=SIIN)
+    run_periodically(keyword, interval=300)
 ```
 1. Käivita programm
 ```bash
-   python -m src.main
+python -m src.main
 ```
 2. Sisesta märksõna
 ```yaml
@@ -73,19 +78,25 @@ Source: arvutitark.ee
 results-amd_20251015_18-02-12.json
 ```
 
+---
+
 ## Struktuur
 ```
-Proovitöö_VariantB/src/
+Proovitöö_VariantB/
 │
-├── main.py                     # Põhiprogramm
-├── results/                    # JSON-failid otsingutulemustega
-├── utils.py                    # Ühised abifunktsioonid
-├── README.md
-└── scrapers/
-    ├── yaga_scraper.py         # Yaga API päring
-    └── arvutitark_scraper.py   # Arvutitark API päring
+├── src/
+│   ├── main.py                     # Põhiprogramm (käivitamine ja tsükliline töö)
+│   ├── utils.py                    # Ühised abifunktsioonid
+│   ├── results/                    # JSON-failid otsingutulemustega
+│   └── scrapers/
+│       ├── yaga_scraper.py         # Yaga API päring
+│       └── arvutitark_scraper.py   # Arvutitark API päring
+│
+└── README.md                       # Käesolev dokumentatsioon
+
 ```
 
+---
 Autor: **Markus Tiedemann**
 
 Valmimisaeg: Oktoober 2025
